@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/EmbarkingFrog/Tequel/issues"
   },
-  "homepage": "https://github.com/EmbarkingFrog/Tequel#readme"
+  "homepage": "https://github.com/EmbarkingFrog/Tequel#readme",
+  "devDependencies": {
+    "typescript": "^4.1.0"
+  }
 }
