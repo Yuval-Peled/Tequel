@@ -36,6 +36,7 @@ describe(`# Tequel e2e test (query parsing, validation and returned schema)`, ()
 		type expected = {
 			name: string,
 			age: number,
+			address: string,
 		}[]
 		const actual: expected = results;
 
