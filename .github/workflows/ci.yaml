@@ -1,0 +1,17 @@
+name: Tequel-CI
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: npm install -g pnpm
+      - run: pnpm install
+      - run: pnpm test
