@@ -45,23 +45,3 @@ type TrimmedStringArray<S extends unknown[]> =
 type Clean<S extends string> = Join<TrimmedStringArray<Split<S, Newline>>, ' '>;
 
 export { Clean, Join, Split, Trimmed, TrimEnd, TrimStart, TrimmedStringArray };
-
-const partialColumnsQuery = `
-SELECT 
-  a, c, d
-FROM
-  table1
-`;
-type model = {
-    columns: {
-        a: 'varchar',
-        b: 'integer',
-        c: 'varchar',
-        d: 'float'
-    },
-    table: 'table1'
-}
-const result2 = pg<model, typeof partialColumnsQuery>(partialColumnsQuery) // returned type contains only selected columns
-type r = ValidateQueryString<model, typeof partialColumnsQuery>
-type rQuery = SqlQuery<r>
-type cleanR = Clean<typeof partialColumnsQuery>
