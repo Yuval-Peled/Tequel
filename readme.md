@@ -1,4 +1,5 @@
-# What is Tequel?
+# Tequel
+## What is Tequel?
 ### Tequel is an experimental *compile-time* schema-aware raw SQL query parser for Typescript.
 
 ###### What does this mean?
@@ -32,6 +33,28 @@ const addresses = badQueryResults.map(result => result.address);
 ###### Definition breakdown:
 - *Query parser*: Tequel validates your query and returns an error or the type of your query's result set. 
 - *Raw SQL*: Tequel has no query builder or DSL. It accepts raw SQL queries as a string as its input.
-- *Schema-aware*: Tequel is aware of table schemas that were passed to it. This means that Tequel doesn't just validate that your query has a legal SQL syntax, but it also makes sure that your query won't throw an error when run against a DB. Tequel will catch things like typos in a column name.
-- *Compile-time*: All this happens during Typescript compilation. This means you can do things like write raw queries and know whether they will run during compile time. You can also change a column name in your DB and immediately know which queries need to be refactored.
+- *Schema-aware*: Tequel is aware of table schemas that were passed to it. This means that Tequel doesn't just validate that your query has a legal SQL syntax, but it also makes sure that your query matches your DB schema. Tequel will catch things like typos in a column name.
+- *Compile-time*: All this happens during Typescript compilation. This means you know whether your query will run during compile time. Another use case - You can also change a column name in your DB and immediately knowing which queries need to be refactored.
 - *Experimental*: This project is not intended for production usage and there is no guarantee that it will be feature-complete. Currently the project is very minimal and implementing more features might expose insurmountable design flaws or issues from the underlying Typescript compilation engine. This library's external API will probably change a lot as it is developed.
+
+## Motivation
+In the current Node.js ecosystem, there are 3 options to developing the applicaiton <> database interface:
+1. Using an ORM and querying with one of its built in query builders - this is type safe but requires learning a new query language which is usually not as flexible or powerful as SQL
+2. Using an ORM and querying with its built in "raw query" functionality - this is not type safe (usually allows type hinting, but mistakes are on you)
+3. Not using an ORM - this is not type safe
+
+You have to choose between compile-time type safety or learning the ORM's query language.
+This library has 2 goals:
+1. Compile-time schema-aware raw SQL type safety
+2. Minimal learning curve for developers who already know SQL
+
+In its current design this library requires learning how to define a schema. However, the schema definition DSL is minimal and uses the same column names and types as the your DB's DDL.
+
+## Future prioritization
+This library will prioritize main use cases of the SQL syntax. This means a breadth-first implementation of the SQL specification. As an example, both "INSERT" and "SELECT" will be partially implemented before all of the specification for an "INSERT" statement.
+
+## Caveats
+- This library requires Typescript 4.1 as it heavily relies on [template literal types](https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/#template-literal-types).
+- While I believe that this use case has merit for real world usage, it is not certain that this implementation is feasible. This project might be abandoned.
+- This library is the maintainer's first attempt at writing a production ready parser - critique is deeply appreciated.
+- The SQL specification is very large and will probably not be fully implemented in this library's parser.
