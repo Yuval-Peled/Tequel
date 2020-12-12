@@ -22,8 +22,10 @@ const ages = queryResults.map(result => result.age); // TS compile error - age w
 
 // For illegal queries (querying a column that doesn't exist), tql is aware of the mistake in the query
 const badQueryResults = await tql.query(`SELECT address FROM people`); 
-const addresses = badQueryResults.map(result => result.address); // ERROR - badQueryResult is a TequelParseError, not an array of results
-// the exact type of badQueryResults is TequelParseError<"Query requested column address which does not exist in requested tables">
+const addresses = badQueryResults.map(result => result.address); 
+// ERROR - badQueryResult is a TequelParseError, not an array of results
+// the exact type of badQueryResults is:
+//      TequelParseError<"Query requested column address which does not exist in requested tables">
 ```
 
 Let's break this down:
