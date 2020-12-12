@@ -38,7 +38,7 @@ const addresses = badQueryResults.map(result => result.address);
 - *Experimental*: This project is not intended for production usage and there is no guarantee that it will be feature-complete. Currently the project is very minimal and implementing more features might expose insurmountable design flaws or issues from the underlying Typescript compilation engine. This library's external API will probably change a lot as it is developed.
 
 ## Motivation
-In the current Node.js ecosystem, there are 3 options to developing the applicaiton <> database interface:
+In the current Node.js ecosystem, there are 3 options to developing the application <> database interface:
 1. Using an ORM and querying with one of its built in query builders - this is type safe but requires learning a new query language which is usually not as flexible or powerful as SQL
 2. Using an ORM and querying with its built in "raw query" functionality - this is not type safe (usually allows type hinting, but mistakes are on you)
 3. Not using an ORM - this is not type safe
@@ -51,7 +51,7 @@ This library has 2 goals:
 In its current design this library requires learning how to define a schema. However, the schema definition DSL is minimal and uses the same column names and types as the your DB's DDL.
 
 ## Future prioritization
-This library will prioritize main use cases of the SQL syntax. This means a breadth-first implementation of the SQL specification. As an example, both "INSERT" and "SELECT" will be partially implemented before all of the specification for an "INSERT" statement.
+This library will prioritize main use cases of the SQL syntax before complete implementation of each feature. This roughly means a breadth-first implementation of the SQL specification. As an example, both "INSERT" and "SELECT" will be partially implemented before all of the specification for an "INSERT" statement.
 
 ## Caveats
 - This library requires Typescript 4.1 as it heavily relies on [template literal types](https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/#template-literal-types).
