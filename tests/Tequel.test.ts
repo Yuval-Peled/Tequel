@@ -12,13 +12,13 @@ describe(`# Tequel e2e test (query parsing, validation and returned schema)`, ()
 	}
 	const tql = new PG<[model]>();
 
-	it(`# returns correct schema for good query - all columns`, () => {
+	it(`# returns correct schema for good query - all columns`, async () => {
 		const query = `
         	SELECT 
     			name, age, salary
   			FROM
     			employees`
-		const results = tql.query<model, typeof query>(query);
+		const results = await tql.query<model, typeof query>(query);
 		type expected = {
 			name: string,
 			age: number,
@@ -27,12 +27,12 @@ describe(`# Tequel e2e test (query parsing, validation and returned schema)`, ()
 		const actual: expected = results;
 	});
 
-	it(`# returns correct schema for good query - partial columns`, () => {
+	it(`# returns correct schema for good query - partial columns`, async () => {
 		const query = `
         	SELECT name, age
   			FROM
     			employees`
-		const results = tql.query<model, typeof query>(query);
+		const results = await tql.query<model, typeof query>(query);
 		type expected = {
 			name: string,
 			age: number,
@@ -48,20 +48,20 @@ describe(`# Tequel e2e test (query parsing, validation and returned schema)`, ()
 		const actualExpectedFail: expectedToFail = results;
 	});
 
-	it(`# When non existent column is queried returned type is parser error`, () => {
+	it(`# When non existent column is queried returned type is parser error`, async () => {
 		const query = `
         	SELECT name, address
   			FROM employees`
-		const results = tql.query<model, typeof query>(query);
+		const results = await tql.query<model, typeof query>(query);
 		type expected = TequelParseError<string>
 		const actual: expected = results;
 	});
 
-	it(`# When non existent table name is queried returned type is parser error`, () => {
+	it(`# When non existent table name is queried returned type is parser error`, async () => {
 		const query = `
         	SELECT name, age
   			FROM emploiees`
-		const results = tql.query<model, typeof query>(query);
+		const results = await tql.query<model, typeof query>(query);
 		type expected = TequelParseError<string>
 		const actual: expected = results;
 	});
