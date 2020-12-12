@@ -11,7 +11,7 @@ type ParsedAndValidatedQuery<D extends Dialects, M extends Model<D>, Q extends s
     : ValidateQuery<D, M, SqlQuery<Q>>; 
 
 export default class Tequel<D extends Dialects, Models extends Model<D>[]> {
-    public query<M extends ArrayContents<Models>, Q extends string>(query: Q) {
+    public async query<M extends ArrayContents<Models>, Q extends string>(query: Q) {
         return 'pretend that this was fetched from the db' as unknown as ParsedAndValidatedQuery<D, M, typeof query>
     }
 }
