@@ -65,7 +65,7 @@ describe(`# QueryValidator tests`, () => {
 
     it(`# Should return a parser error type for querying a the wrong table name`, () => {
         type query = {
-            selected: ['columnC', 'columnB'],
+            selected: ['columnA', 'columnB'],
             tables: ['wrongName']
         }
         type model = {
